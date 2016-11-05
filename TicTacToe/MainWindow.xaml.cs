@@ -29,7 +29,30 @@ namespace TicTacToe
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Hello World!");
+            string login = nickNameTextBox.Text;
+            if (login.Length == 0)
+            {
+                alertLabel.Content = "Wpisz jakiś login";
+            }
+            else if (login.Any(x => Char.IsWhiteSpace(x)))
+            {
+                alertLabel.Content = "Login zawiera białe znaki.";
+            }
+            else
+            {
+                //int status = gameLogicLayer.Join(login);
+                //Console.WriteLine(status);
+                //if (status == 1)
+                //{
+                //    var gameBoard = new GameBoard(gameLogicLayer, login);
+                //    gameBoard.Show();
+                //    this.Close();
+                //}
+                //else
+                //{
+                //    alertLabel.Content = "Wystąpił błąd";
+                //}
+            }
         }
 
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
