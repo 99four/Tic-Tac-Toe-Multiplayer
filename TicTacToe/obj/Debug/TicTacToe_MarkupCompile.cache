@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-c:\users\kaczo\documents\visual studio 2015\Projects\TicTacToe\TicTacToe\obj\Debug\
+C:\Users\kaczo\Documents\Visual Studio 2015\Projects\TicTacToe\TicTacToe\obj\Debug\
 TicTacToe
 none
 false
 DEBUG;TRACE
-c:\users\kaczo\documents\visual studio 2015\Projects\TicTacToe\TicTacToe\App.xaml
-11151548125
+C:\Users\kaczo\Documents\Visual Studio 2015\Projects\TicTacToe\TicTacToe\App.xaml
+2-468893330
 
-5-2017746502
+8-784591337
 13738642453
-MainWindow.xaml;
+GameBoard.xaml;MainWindow.xaml;
 
 False
 

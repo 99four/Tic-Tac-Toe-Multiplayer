@@ -10,31 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace TicTacToe
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for GameBoard.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GameBoard : Window
     {
-        GameLogicLayer gameLogicLayer;
-        public MainWindow()
+        public GameBoard()
         {
-            gameLogicLayer = new GameLogicLayer();
             InitializeComponent();
-        }
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Hello World!");
-        }
-
-        private void textBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }

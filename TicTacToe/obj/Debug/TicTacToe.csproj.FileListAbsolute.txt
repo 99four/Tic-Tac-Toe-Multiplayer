@@ -12,3 +12,5 @@ c:\users\kaczo\documents\visual studio 2015\Projects\TicTacToe\TicTacToe\obj\Deb
 c:\users\kaczo\documents\visual studio 2015\Projects\TicTacToe\TicTacToe\obj\Debug\TicTacToe.csproj.GenerateResource.Cache
 c:\users\kaczo\documents\visual studio 2015\Projects\TicTacToe\TicTacToe\obj\Debug\TicTacToe.exe
 c:\users\kaczo\documents\visual studio 2015\Projects\TicTacToe\TicTacToe\obj\Debug\TicTacToe.pdb
+C:\Users\kaczo\Documents\Visual Studio 2015\Projects\TicTacToe\TicTacToe\obj\Debug\GameBoard.g.cs
+C:\Users\kaczo\Documents\Visual Studio 2015\Projects\TicTacToe\TicTacToe\obj\Debug\GameBoard.baml
