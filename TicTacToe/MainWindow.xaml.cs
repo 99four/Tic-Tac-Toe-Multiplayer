@@ -20,7 +20,8 @@ namespace TicTacToe
     /// </summary>
     public partial class MainWindow : Window
     {
-        GameLogicLayer gameLogicLayer;
+        private GameLogicLayer gameLogicLayer;
+        private GameBoard gameBoard;
         public MainWindow()
         {
             gameLogicLayer = new GameLogicLayer();
@@ -40,6 +41,10 @@ namespace TicTacToe
             }
             else
             {
+                gameBoard = new GameBoard(gameLogicLayer, login);
+                gameBoard.Show();
+                this.Close();
+
                 //int status = gameLogicLayer.Join(login);
                 //Console.WriteLine(status);
                 //if (status == 1)

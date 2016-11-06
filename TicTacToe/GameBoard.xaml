@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="GameBoard" Height="300" Width="300">
     <Grid>
-        
+        <Button x:Name="button" Content="Plansza do gry" HorizontalAlignment="Left" Margin="94,119,0,0" VerticalAlignment="Top" Width="130" Height="55"/>
+
     </Grid>
 </Window>

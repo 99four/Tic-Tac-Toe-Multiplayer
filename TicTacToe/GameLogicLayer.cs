@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TicTacToe
 {
-    class GameLogicLayer
+    public class GameLogicLayer
     {
     }
 }

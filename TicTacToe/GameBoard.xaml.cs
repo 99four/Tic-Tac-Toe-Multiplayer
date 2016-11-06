@@ -19,8 +19,13 @@ namespace TicTacToe
     /// </summary>
     public partial class GameBoard : Window
     {
-        public GameBoard()
+        private GameLogicLayer gameLogicLayer;
+        private string myLogin;
+
+        public GameBoard(GameLogicLayer gameLogicLayer, string myLogin)
         {
+            this.gameLogicLayer = gameLogicLayer;
+            this.myLogin = myLogin;
             InitializeComponent();
         }
     }
