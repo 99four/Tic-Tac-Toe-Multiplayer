@@ -152,8 +152,6 @@ namespace TicTacToe
                 MessageBox.Show("Exception:\t\n" + exc.Message.ToString());
             }
         }
-
-
     }
 
     public class SocketStateObject
