@@ -7,14 +7,14 @@
         mc:Ignorable="d"
         Title="GameBoard" Height="403.738" Width="372.897">
     <Grid>
-        <Button x:Name="a1" Content="Button" HorizontalAlignment="Left" Margin="46,55,0,0" VerticalAlignment="Top" Width="75" Height="75"/>
-        <Button x:Name="a3" Content="Button" HorizontalAlignment="Left" Margin="237,55,0,0" VerticalAlignment="Top" Width="75" Height="75"/>
-        <Button x:Name="a2" Content="Button" HorizontalAlignment="Left" Margin="142,55,0,0" VerticalAlignment="Top" Width="75" Height="75"/>
-        <Button x:Name="b1" Content="Button" HorizontalAlignment="Left" Margin="46,149,0,0" VerticalAlignment="Top" Width="75" Height="75"/>
-        <Button x:Name="b3" Content="Button" HorizontalAlignment="Left" Margin="237,149,0,0" VerticalAlignment="Top" Width="75" Height="75"/>
-        <Button x:Name="b2" Content="Button" HorizontalAlignment="Left" Margin="142,149,0,0" VerticalAlignment="Top" Width="75" Height="75"/>
-        <Button x:Name="c1" Content="Button" HorizontalAlignment="Left" Margin="46,248,0,0" VerticalAlignment="Top" Width="75" Height="75"/>
-        <Button x:Name="c3" Content="Button" HorizontalAlignment="Left" Margin="237,248,0,0" VerticalAlignment="Top" Width="75" Height="75"/>
-        <Button x:Name="c2" Content="Button" HorizontalAlignment="Left" Margin="142,248,0,0" VerticalAlignment="Top" Width="75" Height="75"/>
+        <Button x:Name="a1" Content="" HorizontalAlignment="Left" Margin="46,55,0,0" VerticalAlignment="Top" Width="75" Height="75" Click="a1_Click"/>
+        <Button x:Name="a3" Content="" HorizontalAlignment="Left" Margin="237,55,0,0" VerticalAlignment="Top" Width="75" Height="75" Click="a3_Click"/>
+        <Button x:Name="a2" Content="" HorizontalAlignment="Left" Margin="142,55,0,0" VerticalAlignment="Top" Width="75" Height="75" Click="a2_Click"/>
+        <Button x:Name="b1" Content="" HorizontalAlignment="Left" Margin="46,149,0,0" VerticalAlignment="Top" Width="75" Height="75" Click="b1_Click"/>
+        <Button x:Name="b3" Content="" HorizontalAlignment="Left" Margin="237,149,0,0" VerticalAlignment="Top" Width="75" Height="75" Click="b3_Click"/>
+        <Button x:Name="b2" Content="" HorizontalAlignment="Left" Margin="142,149,0,0" VerticalAlignment="Top" Width="75" Height="75" Click="b2_Click"/>
+        <Button x:Name="c1" Content="" HorizontalAlignment="Left" Margin="46,248,0,0" VerticalAlignment="Top" Width="75" Height="75" Click="c1_Click"/>
+        <Button x:Name="c3" Content="" HorizontalAlignment="Left" Margin="237,248,0,0" VerticalAlignment="Top" Width="75" Height="75" Click="c3_Click"/>
+        <Button x:Name="c2" Content="" HorizontalAlignment="Left" Margin="142,248,0,0" VerticalAlignment="Top" Width="75" Height="75" Click="c2_Click"/>
     </Grid>
 </Window>
