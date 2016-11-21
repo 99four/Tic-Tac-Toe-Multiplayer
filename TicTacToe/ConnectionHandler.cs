@@ -137,7 +137,7 @@ namespace TicTacToe
 
                 System.Net.IPAddress LongIp = System.Net.IPAddress.Parse(ip);
 
-                endPoint = new IPEndPoint(LongIp, Int32.Parse("1234"));
+                endPoint = new IPEndPoint(LongIp, Int32.Parse("6669"));
 
 
 

@@ -31,6 +31,11 @@ namespace TicTacToe
         private void button_Click(object sender, RoutedEventArgs e)
         {
             string login = nickNameTextBox.Text;
+            //string ip = ipTextBox.Text;
+            string ip = "192.168.0.100";
+
+            gameLogicLayer.Connect(ip);
+
             if (login.Length == 0)
             {
                 alertLabel.Content = "Wpisz jakiś login";
@@ -41,22 +46,10 @@ namespace TicTacToe
             }
             else
             {
+                gameLogicLayer.Join(login);
                 gameBoard = new GameBoard(gameLogicLayer, login);
                 gameBoard.Show();
                 this.Close();
-
-                //int status = gameLogicLayer.Join(login);
-                //Console.WriteLine(status);
-                //if (status == 1)
-                //{
-                //    var gameBoard = new GameBoard(gameLogicLayer, login);
-                //    gameBoard.Show();
-                //    this.Close();
-                //}
-                //else
-                //{
-                //    alertLabel.Content = "Wystąpił błąd";
-                //}
             }
         }
 

@@ -9,7 +9,9 @@
     <Grid>
         <Button x:Name="button" Content="Połącz z serwerem i graj!" HorizontalAlignment="Left" Margin="187,219,0,0" VerticalAlignment="Top" Width="157" RenderTransformOrigin="1.127,0.721" Click="button_Click" Height="34"/>
         <TextBox x:Name="nickNameTextBox" HorizontalAlignment="Left" Height="23" Margin="197,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="textBox_TextChanged"/>
-        <Label x:Name="label" Content="Podaj swój nick" HorizontalAlignment="Left" Margin="204,125,0,0" VerticalAlignment="Top" Width="157"/>
+        <Label x:Name="label" Content="Podaj swój nick" HorizontalAlignment="Left" Margin="197,133,0,0" VerticalAlignment="Top" Width="157"/>
         <Label x:Name="alertLabel" Content="" HorizontalAlignment="Left" Margin="197,151,0,0" VerticalAlignment="Top" Width="113"/>
+        <TextBox x:Name="ipTextBox" HorizontalAlignment="Left" Height="23" Margin="197,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label1" Content="Podaj IP serwera" HorizontalAlignment="Left" Margin="197,53,0,0" VerticalAlignment="Top" Width="113"/>
     </Grid>
 </Window>
