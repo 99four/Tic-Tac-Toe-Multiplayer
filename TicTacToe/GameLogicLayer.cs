@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,54 +27,87 @@ namespace TicTacToe
             Console.WriteLine(login);
             cHandler.SendData("1 " + login);
             //int status = Int32.Parse(cHandler.Receive());
-            string response = cHandler.Receive();
-            string[] splittedResponse;
+            cHandler.Receive((response) => {
+                string[] splittedResponse;
+                splittedResponse = response.Split(' ');
+                Console.WriteLine(response);
+                Console.WriteLine(splittedResponse);
+
+                opponnentNickname = splittedResponse[0];
+                opponnentDescriptor = Int32.Parse(splittedResponse[1]);
+                isMyTurn = Int32.Parse(splittedResponse[2]);
+
+                Console.WriteLine("nick przeciwnika to: " + opponnentNickname);
+                Console.WriteLine("deskryptor przeciwnika to: " + opponnentDescriptor);
+                Console.WriteLine("moja kolejnosc? : " + isMyTurn);
+
+                if (isMyTurn == 1)
+                {
+                    myTurn = 'O';
+                    //("Twoj ruch to " + myTurn);
+                }
+                else
+                {
+                    /* begin receiving the data */
+                    cHandler.Receive((res) =>
+                    {
+                        myTurn = 'X';
+                        Console.WriteLine("ruch przeciwnika to " + res);
+                        isMyTurn = 1;
+                    });
+                }
+            });
             
-            splittedResponse = response.Split(' ');
+        }
 
-            opponnentNickname = splittedResponse[0];
-            opponnentDescriptor = Int32.Parse(splittedResponse[1]);
-            isMyTurn = Int32.Parse(splittedResponse[2]);
-
-            Console.WriteLine("nick przeciwnika to: " + opponnentNickname);
-            Console.WriteLine("deskryptor przeciwnika to: " + opponnentDescriptor);
-            Console.WriteLine("moja kolejnosc? : " + isMyTurn);
-
-            if (isMyTurn == 1)
+        private void ReceiveCallback(IAsyncResult ar)
+        {
+            try
             {
-                myTurn = 'O';
-                MessageBox.Show("Twoj ruch to " + myTurn);
+                /* retrieve the SocketStateObject */
+                SocketStateObject state = (SocketStateObject)ar.AsyncState;
+                Socket socketFd = state.m_SocketFd;
+
+                /* read data */
+                int size = socketFd.EndReceive(ar);
+
+                if (size > 0)
+                {
+                    state.m_StringBuilder.Append(Encoding.ASCII.GetString(state.m_DataBuf, 0, size));
+
+                    /* get the rest of the data */
+                    socketFd.BeginReceive(state.m_DataBuf, 0, SocketStateObject.BUF_SIZE, 0,
+                                          new AsyncCallback(ReceiveCallback), state);
+                }
+                else
+                {
+                    /* all the data has arrived */
+                    if (state.m_StringBuilder.Length > 1)
+                    {
+                        /* shutdown and close socket */
+                        socketFd.Shutdown(SocketShutdown.Both);
+                        socketFd.Close();
+                    }
+                }
             }
-            else
+            catch (Exception exc)
             {
-                myTurn = 'X';
-                MessageBox.Show("Twoj ruch to " + myTurn);
+                MessageBox.Show("Exception:\t\n" + exc.Message.ToString());
             }
-
-            //if (isMyTurn == 1)
-            //{
-
-            //}
-            //else
-            //{
-
-            //}
-
-            //return status;
         }
 
         public void sendClickedField(string field)
         {
-            if(isMyTurn == 1)
+            //string opponnentTurn;
+            if (isMyTurn == 1)
             {
                 cHandler.SendData("2 " + field + " " + opponnentDescriptor);
+                
                 isMyTurn = 0;
+                cHandler.Receive((res) => Console.WriteLine("Hello "+ res));
             }
             else
             {
-                string opponnentTurn = cHandler.Receive();
-
-                Console.WriteLine(opponnentTurn);
                 isMyTurn = 1;
             }
         }

@@ -20,32 +20,41 @@ namespace TicTacToe
 
         private void ReceiveCallback(IAsyncResult ar)
         {
-
             try
             {
+                /* retrieve the SocketStateObject */
+                var parameters = (CallbackObject)ar.AsyncState;
+           
+                Socket socketFd = parameters.state.m_SocketFd;
 
-                SocketStateObject state = (SocketStateObject)ar.AsyncState;
-                Socket socketFd = state.m_SocketFd;
-
-
+                /* read data */
                 int size = socketFd.EndReceive(ar);
-
+                Console.WriteLine(size);
 
                 if (size > 0)
                 {
-                    state.m_StringBuilder.Append(Encoding.ASCII.GetString(state.m_DataBuf, 0, size));
+                    parameters.state.m_StringBuilder.Append(Encoding.ASCII.GetString(parameters.state.m_DataBuf, 0, size));
+                    Console.WriteLine(parameters.state.m_StringBuilder.ToString());
+
+               
+
+                    /* all the data has arrived */
+                    if (parameters.state.m_StringBuilder.Length > 1)
+                    {
+                        parameters.callback(parameters.state.m_StringBuilder.ToString());
+                    }
                 }
-
-                receiveDone.Set();
-
+                
             }
             catch (Exception exc)
             {
                 MessageBox.Show("Exception:\t\n" + exc.Message.ToString());
+              
             }
-        }
 
-        public void SendData(String message)
+    }
+
+    public void SendData(String message)
         {
 
             sendDone.Reset();
@@ -81,22 +90,29 @@ namespace TicTacToe
             }
         }
 
-        public string Receive()
+        class CallbackObject {
+            public SocketStateObject state { get; set; }
+            public Action<string> callback { get; set; }
+            public CallbackObject(SocketStateObject _state, Action<string> _callback) {
+                callback = _callback;
+                state = _state;
+                    }
+        }
+
+        public void Receive(Action<string> _callback)
         {
             receiveDone.Reset();
             /* begin receiving the data */
-            SocketStateObject state = new SocketStateObject();
-
+            var state = new SocketStateObject();
             state.m_SocketFd = currentSocketFd;
-
+            var parameters = new CallbackObject(state,_callback);
+            
             Socket socketFd = currentSocketFd;
 
             socketFd.BeginReceive(state.m_DataBuf, 0, SocketStateObject.BUF_SIZE, 0,
-                                 new AsyncCallback(ReceiveCallback), state);
+                                 new AsyncCallback(ReceiveCallback), parameters);
 
-            receiveDone.WaitOne();
-
-            return state.m_StringBuilder.ToString();
+      
 
         }
         private void ConnectCallback(IAsyncResult ar)

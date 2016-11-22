@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="GameBoard" Height="403.738" Width="372.897">
     <Grid>
-        <Button x:Name="a1" Content="" HorizontalAlignment="Left" Margin="46,55,0,0" VerticalAlignment="Top" Width="75" Height="75" Click="a1_Click"/>
+        <Button x:Name="a1" Content="" HorizontalAlignment="Left" Margin="46,55,0,0" VerticalAlignment="Top" Width="75" Height="75" Click="a1_Click" FontSize="21.333"/>
         <Button x:Name="a3" Content="" HorizontalAlignment="Left" Margin="237,55,0,0" VerticalAlignment="Top" Width="75" Height="75" Click="a3_Click"/>
         <Button x:Name="a2" Content="" HorizontalAlignment="Left" Margin="142,55,0,0" VerticalAlignment="Top" Width="75" Height="75" Click="a2_Click"/>
         <Button x:Name="b1" Content="" HorizontalAlignment="Left" Margin="46,149,0,0" VerticalAlignment="Top" Width="75" Height="75" Click="b1_Click"/>
