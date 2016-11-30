@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace TicTacToe
 {
-    class ConnectionHandler
+    public class ConnectionHandler
     {
         private ManualResetEvent connectDone = new ManualResetEvent(false);
         private ManualResetEvent sendDone = new ManualResetEvent(false);
@@ -29,12 +29,12 @@ namespace TicTacToe
 
                 /* read data */
                 int size = socketFd.EndReceive(ar);
-                Console.WriteLine(size);
+                //Console.WriteLine(size);
 
                 if (size > 0)
                 {
                     parameters.state.m_StringBuilder.Append(Encoding.ASCII.GetString(parameters.state.m_DataBuf, 0, size));
-                    Console.WriteLine(parameters.state.m_StringBuilder.ToString());
+               //     Console.WriteLine(parameters.state.m_StringBuilder.ToString());
 
                
 

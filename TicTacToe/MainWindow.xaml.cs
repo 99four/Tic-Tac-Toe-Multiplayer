@@ -20,11 +20,14 @@ namespace TicTacToe
     /// </summary>
     public partial class MainWindow : Window
     {
-        private GameLogicLayer gameLogicLayer;
-        private GameBoard gameBoard;
+        public GameLogicLayer gameLogicLayer;
+        public GameBoard gameBoard;
+        public ConnectionHandler cHandler;
+
         public MainWindow()
         {
             gameLogicLayer = new GameLogicLayer();
+            cHandler = new ConnectionHandler();
             InitializeComponent();
         }
 
@@ -32,7 +35,7 @@ namespace TicTacToe
         {
             string login = nickNameTextBox.Text;
             //string ip = ipTextBox.Text;
-            string ip = "192.168.0.100";
+            string ip = "192.168.0.101";
 
             gameLogicLayer.Connect(ip);
 
@@ -47,7 +50,7 @@ namespace TicTacToe
             else
             {
                 gameLogicLayer.Join(login);
-                gameBoard = new GameBoard(gameLogicLayer, login);
+                gameBoard = new GameBoard(gameLogicLayer, login, cHandler);
                 gameBoard.Show();
                 this.Close();
             }

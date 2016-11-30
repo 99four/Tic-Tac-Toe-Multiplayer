@@ -11,10 +11,12 @@ namespace TicTacToe
 {
     public class GameLogicLayer
     {
-        private ConnectionHandler cHandler;
+        public ConnectionHandler cHandler;
         private string opponnentNickname;
         private int opponnentDescriptor;
-        private int isMyTurn;
+        public Button ZMienna { get; set; }
+
+        public int isMyTurn;
         public char myTurn { get; set; }
 
         public GameLogicLayer()
@@ -24,36 +26,32 @@ namespace TicTacToe
 
         public void Join(string login)
         {
-            Console.WriteLine(login);
+            //Console.WriteLine(login);
             cHandler.SendData("1 " + login);
             //int status = Int32.Parse(cHandler.Receive());
             cHandler.Receive((response) => {
-                string[] splittedResponse;
-                splittedResponse = response.Split(' ');
-                Console.WriteLine(response);
-                Console.WriteLine(splittedResponse);
+                string[] splittedResponse = response.Split(null);
+                Console.WriteLine("response to: " + response);
+
+                foreach(string elem in splittedResponse)
+                {
+                    Console.WriteLine("splitted elem to " + elem);
+                }
 
                 opponnentNickname = splittedResponse[0];
                 opponnentDescriptor = Int32.Parse(splittedResponse[1]);
                 isMyTurn = Int32.Parse(splittedResponse[2]);
+                 // jezeli nie moja tura to nasluchuje na odpowiedz , jezeli dostane wiadomosc to uaktualniam plansze i isMyturn=1
 
-                Console.WriteLine("nick przeciwnika to: " + opponnentNickname);
-                Console.WriteLine("deskryptor przeciwnika to: " + opponnentDescriptor);
-                Console.WriteLine("moja kolejnosc? : " + isMyTurn);
-
-                if (isMyTurn == 1)
+                if (isMyTurn == 0)
                 {
-                    myTurn = 'O';
-                    //("Twoj ruch to " + myTurn);
-                }
-                else
-                {
-                    /* begin receiving the data */
                     cHandler.Receive((res) =>
                     {
-                        myTurn = 'X';
-                        Console.WriteLine("ruch przeciwnika to " + res);
-                        isMyTurn = 1;
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            ZMienna.Content = "O";
+                            isMyTurn = 1;
+                        });
                     });
                 }
             });
@@ -106,10 +104,7 @@ namespace TicTacToe
                 isMyTurn = 0;
                 cHandler.Receive((res) => Console.WriteLine("Hello "+ res));
             }
-            else
-            {
-                isMyTurn = 1;
-            }
+        
         }
 
         public void Connect(string ip)
