@@ -38,9 +38,10 @@ namespace TicTacToe
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.gameLogicLayer.a1 = a1;
-            this.gameLogicLayer.a2 = a2;
-            this.gameLogicLayer.a3 = a3;
+            //this.gameLogicLayer.a1 = a1;
+            //this.gameLogicLayer.a2 = a2;
+            //this.gameLogicLayer.a3 = a3;
+            this.gameLogicLayer.LayoutRoot = LayoutRoot;
         }
     }
 }

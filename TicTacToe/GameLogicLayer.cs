@@ -14,9 +14,11 @@ namespace TicTacToe
         public ConnectionHandler cHandler;
         private string opponnentNickname;
         private int opponnentDescriptor;
-        public Button a1 { get; set; }
-        public Button a2 { get; set; }
-        public Button a3 { get; set; }
+        //public Button a1 { get; set; }
+        //public Button a2 { get; set; }
+        //public Button a3 { get; set; }
+        public Grid LayoutRoot { get; set; }
+        private Button fieldToSet;
 
         public int isMyTurn;
         public char myTurn { get; set; }
@@ -54,14 +56,8 @@ namespace TicTacToe
                     {
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            if(res.Substring(0,2) == "a1")
-                            {
-                                a1.Content = opponnentsTurn;
-                            } else if (res.Substring(0,2) == "a2")
-                            {
-                                a2.Content = opponnentsTurn;
-                            }
-                            res.Substring(0, 2);
+                            Button opponnentsTurnButton = (Button)LayoutRoot.FindName(res.Substring(0, 2));
+                            opponnentsTurnButton.Content = opponnentsTurn;
                             isMyTurn = 1;
                         });
                     });
@@ -112,7 +108,6 @@ namespace TicTacToe
 
         public void sendClickedField(string field)
         {
-            //string opponnentTurn;
             if (isMyTurn == 1)
             {
                 cHandler.SendData("2 " + field + " " + opponnentDescriptor);
@@ -122,18 +117,8 @@ namespace TicTacToe
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        if (res.Substring(0, 2) == "a1")
-                        {
-                            a1.Content = opponnentsTurn;
-                        }
-                        else if (res.Substring(0, 2) == "a2")
-                        {
-                            a2.Content = opponnentsTurn;
-                        }
-                        else if (res.Substring(0, 2) == "a3")
-                        {
-                            a3.Content = opponnentsTurn;
-                        }
+                        Button opponnentsTurnButton = (Button)LayoutRoot.FindName(res.Substring(0, 2));
+                        opponnentsTurnButton.Content = opponnentsTurn;
                         isMyTurn = 1;
                     });
                 });
