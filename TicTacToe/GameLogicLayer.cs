@@ -14,7 +14,8 @@ namespace TicTacToe
         public ConnectionHandler cHandler;
         private string opponnentNickname;
         private int opponnentDescriptor;
-        public Button ZMienna { get; set; }
+        public Button a1 { get; set; }
+        public Button a2 { get; set; }
 
         public int isMyTurn;
         public char myTurn { get; set; }
@@ -49,7 +50,14 @@ namespace TicTacToe
                     {
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            ZMienna.Content = "O";
+                            if(res.Substring(0,2) == "a1")
+                            {
+                                a1.Content = "O";
+                            } else if (res.Substring(0,2) == "a2")
+                            {
+                                a2.Content = "O";
+                            }
+                            res.Substring(0, 2);
                             isMyTurn = 1;
                         });
                     });
@@ -101,8 +109,22 @@ namespace TicTacToe
             {
                 cHandler.SendData("2 " + field + " " + opponnentDescriptor);
                 
-                isMyTurn = 0;
-                cHandler.Receive((res) => Console.WriteLine("Hello "+ res));
+                cHandler.Receive((res) =>
+                {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        if (res.Substring(0, 2) == "a1")
+                        {
+                            a1.Content = "X";
+                        }
+                        else if (res.Substring(0, 2) == "a2")
+                        {
+                            a2.Content = "X";
+                        }
+                        res.Substring(0, 2);
+                        isMyTurn = 0;
+                    });
+                });
             }
         
         }

@@ -35,7 +35,7 @@ namespace TicTacToe
         {
             string login = nickNameTextBox.Text;
             //string ip = ipTextBox.Text;
-            string ip = "192.168.0.101";
+            string ip = "192.168.0.100";
 
             gameLogicLayer.Connect(ip);
 

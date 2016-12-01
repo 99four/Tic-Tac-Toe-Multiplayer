@@ -95,7 +95,8 @@ namespace TicTacToe
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.gameLogicLayer.ZMienna = a1;
+            this.gameLogicLayer.a1 = a1;
+            this.gameLogicLayer.a2 = a2;
         }
     }
 }
