@@ -46,6 +46,7 @@ namespace TicTacToe
 
                 if (isMyTurn == 0)
                 {
+                    myTurn = 'X';
                     cHandler.Receive((res) =>
                     {
                         Application.Current.Dispatcher.Invoke(() =>
@@ -61,6 +62,9 @@ namespace TicTacToe
                             isMyTurn = 1;
                         });
                     });
+                } else
+                {
+                    myTurn = 'O';
                 }
             });
             
