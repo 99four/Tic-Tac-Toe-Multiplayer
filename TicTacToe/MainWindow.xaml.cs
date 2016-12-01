@@ -50,7 +50,7 @@ namespace TicTacToe
             else
             {
                 gameLogicLayer.Join(login);
-                gameBoard = new GameBoard(gameLogicLayer, login, cHandler);
+                gameBoard = new GameBoard(gameLogicLayer, login);
                 gameBoard.Show();
                 this.Close();
             }

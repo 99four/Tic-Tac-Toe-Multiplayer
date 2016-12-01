@@ -16,9 +16,11 @@ namespace TicTacToe
         private int opponnentDescriptor;
         public Button a1 { get; set; }
         public Button a2 { get; set; }
+        public Button a3 { get; set; }
 
         public int isMyTurn;
         public char myTurn { get; set; }
+        public char opponnentsTurn { get; set; }
 
         public GameLogicLayer()
         {
@@ -47,16 +49,17 @@ namespace TicTacToe
                 if (isMyTurn == 0)
                 {
                     myTurn = 'X';
+                    opponnentsTurn = 'O';
                     cHandler.Receive((res) =>
                     {
                         Application.Current.Dispatcher.Invoke(() =>
                         {
                             if(res.Substring(0,2) == "a1")
                             {
-                                a1.Content = "O";
+                                a1.Content = opponnentsTurn;
                             } else if (res.Substring(0,2) == "a2")
                             {
-                                a2.Content = "O";
+                                a2.Content = opponnentsTurn;
                             }
                             res.Substring(0, 2);
                             isMyTurn = 1;
@@ -65,6 +68,7 @@ namespace TicTacToe
                 } else
                 {
                     myTurn = 'O';
+                    opponnentsTurn = 'X';
                 }
             });
             
@@ -112,6 +116,7 @@ namespace TicTacToe
             if (isMyTurn == 1)
             {
                 cHandler.SendData("2 " + field + " " + opponnentDescriptor);
+                isMyTurn = 0;
                 
                 cHandler.Receive((res) =>
                 {
@@ -119,14 +124,17 @@ namespace TicTacToe
                     {
                         if (res.Substring(0, 2) == "a1")
                         {
-                            a1.Content = "X";
+                            a1.Content = opponnentsTurn;
                         }
                         else if (res.Substring(0, 2) == "a2")
                         {
-                            a2.Content = "X";
+                            a2.Content = opponnentsTurn;
                         }
-                        res.Substring(0, 2);
-                        isMyTurn = 0;
+                        else if (res.Substring(0, 2) == "a3")
+                        {
+                            a3.Content = opponnentsTurn;
+                        }
+                        isMyTurn = 1;
                     });
                 });
             }

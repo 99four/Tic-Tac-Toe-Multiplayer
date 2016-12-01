@@ -22,7 +22,7 @@ namespace TicTacToe
         private GameLogicLayer gameLogicLayer;
         private string myLogin;
 
-        public GameBoard(GameLogicLayer gameLogicLayer, string myLogin, ConnectionHandler cHandler)
+        public GameBoard(GameLogicLayer gameLogicLayer, string myLogin)
         {
             this.gameLogicLayer = gameLogicLayer;
             this.myLogin = myLogin;
@@ -40,6 +40,7 @@ namespace TicTacToe
         {
             this.gameLogicLayer.a1 = a1;
             this.gameLogicLayer.a2 = a2;
+            this.gameLogicLayer.a3 = a3;
         }
     }
 }
