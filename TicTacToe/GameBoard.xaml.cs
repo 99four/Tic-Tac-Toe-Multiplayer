@@ -39,9 +39,12 @@ namespace TicTacToe
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (Button b in LayoutRoot.Children)
+            foreach (Control c in LayoutRoot.Children)
             {
-                b.IsEnabled = false;
+                if (c is Button)
+                {
+                    c.IsEnabled = false;
+                }
             }
             this.gameLogicLayer.LayoutRoot = LayoutRoot;
         }

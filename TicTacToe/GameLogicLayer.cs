@@ -12,7 +12,7 @@ namespace TicTacToe
     public class GameLogicLayer
     {
         public ConnectionHandler cHandler;
-        private string opponnentNickname;
+        public string opponnentNickname { get; set; }
         private int opponnentDescriptor;
         //public Button a1 { get; set; }
         //public Button a2 { get; set; }
@@ -52,15 +52,38 @@ namespace TicTacToe
                 {
                     myTurn = 'X';
                     opponnentsTurn = 'O';
+
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        foreach (Control c in LayoutRoot.Children)
+                        {
+                            if (c is Label)
+                            {
+                                Label myNickLabel = (Label)LayoutRoot.FindName("myNickLabel");
+                                Label myTurnLabel = (Label)LayoutRoot.FindName("myTurnLabel");
+                                Label opponnentsTurnLabel = (Label)LayoutRoot.FindName("opponnentsTurnLabel");
+                                Label opponnentsNickLabel = (Label)LayoutRoot.FindName("opponnentsNickLabel");
+                                myNickLabel.Content = login;
+                                myTurnLabel.Content = myTurn;
+                                opponnentsNickLabel.Content = opponnentNickname;
+                                opponnentsTurnLabel.Content = opponnentsTurn;
+                            }
+                        }
+                    });
+
                     cHandler.Receive((res) =>
                     {
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            foreach (Button b in LayoutRoot.Children)
+                            foreach (Control c in LayoutRoot.Children)
                             {
-                                if (b.Content == "")
+                                if (c is Button)
                                 {
-                                    b.IsEnabled = true;
+                                    Button b = (Button)c;
+                                    if (b.Content == "")
+                                    {
+                                        b.IsEnabled = true;
+                                    }
                                 }
                             }
                             Button opponnentsTurnButton = (Button)LayoutRoot.FindName(res.Substring(0, 2));
@@ -71,15 +94,30 @@ namespace TicTacToe
                     });
                 } else
                 {
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        foreach (Button b in LayoutRoot.Children)
-                        {
-                            b.IsEnabled = true;
-                        }
-                    });
                     myTurn = 'O';
                     opponnentsTurn = 'X';
+
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        foreach (Control c in LayoutRoot.Children)
+                        {
+                            if (c is Button)
+                            {
+                                c.IsEnabled = true;
+                            }
+                            else if (c is Label)
+                            {
+                                Label myNickLabel = (Label)LayoutRoot.FindName("myNickLabel");
+                                Label myTurnLabel = (Label)LayoutRoot.FindName("myTurnLabel");
+                                Label opponnentsTurnLabel = (Label)LayoutRoot.FindName("opponnentsTurnLabel");
+                                Label opponnentsNickLabel = (Label)LayoutRoot.FindName("opponnentsNickLabel");
+                                myNickLabel.Content = login;
+                                myTurnLabel.Content = myTurn;
+                                opponnentsNickLabel.Content = opponnentNickname;
+                                opponnentsTurnLabel.Content = opponnentsTurn;
+                            }
+                        }
+                    });
                 }
             });
             
@@ -125,9 +163,12 @@ namespace TicTacToe
         {
             if (isMyTurn == 1)
             {
-                foreach (Button b in LayoutRoot.Children)
+                foreach (Control c in LayoutRoot.Children)
                 {
-                    b.IsEnabled = false;
+                    if (c is Button)
+                    {
+                        c.IsEnabled = false;
+                    }
                 }
 
                 cHandler.SendData("2 " + field + " " + opponnentDescriptor);
@@ -137,16 +178,32 @@ namespace TicTacToe
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        foreach (Button b in LayoutRoot.Children)
+                        foreach (Control c in LayoutRoot.Children)
                         {
-                            if(b.Content == "")
+                            if (c is Button)
                             {
-                                b.IsEnabled = true;
+                                Button bb = (Button)c;
+                                if (bb.Content == "")
+                                {
+                                    bb.IsEnabled = true;
+                                }
                             }
                         }
-                        Button opponnentsTurnButton = (Button)LayoutRoot.FindName(res.Substring(0, 2));
-                        opponnentsTurnButton.Content = opponnentsTurn;
-                        opponnentsTurnButton.IsEnabled = false;
+                        if (res.Substring(0, 1) != 4.ToString())
+                        {
+                            Button opponnentsTurnButton = (Button)LayoutRoot.FindName(res.Substring(0, 2));
+                            opponnentsTurnButton.Content = opponnentsTurn;
+                            opponnentsTurnButton.IsEnabled = false;
+                        } else
+                        {
+                            MessageBox.Show("Mamy zwycięzcę! Wygrywa " + opponnentNickname);
+
+                            foreach (Button b in LayoutRoot.Children)
+                            {
+                                b.IsEnabled = false;
+                            }
+                        }
+                        
                         isMyTurn = 1;
                     });
                 });
