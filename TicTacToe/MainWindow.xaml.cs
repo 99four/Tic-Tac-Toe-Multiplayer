@@ -49,9 +49,9 @@ namespace TicTacToe
             }
             else
             {
-                gameLogicLayer.Join(login);
                 gameBoard = new GameBoard(gameLogicLayer, login);
                 gameBoard.Show();
+                gameLogicLayer.Join(login);
                 this.Close();
             }
         }

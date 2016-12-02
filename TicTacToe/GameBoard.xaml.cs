@@ -34,13 +34,15 @@ namespace TicTacToe
             Button clickedButton = (Button)sender;
             clickedButton.Content = gameLogicLayer.myTurn;
             gameLogicLayer.sendClickedField(clickedButton.Name);
+            clickedButton.IsEnabled = false;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //this.gameLogicLayer.a1 = a1;
-            //this.gameLogicLayer.a2 = a2;
-            //this.gameLogicLayer.a3 = a3;
+            foreach (Button b in LayoutRoot.Children)
+            {
+                b.IsEnabled = false;
+            }
             this.gameLogicLayer.LayoutRoot = LayoutRoot;
         }
     }

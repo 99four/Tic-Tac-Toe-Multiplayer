@@ -18,7 +18,6 @@ namespace TicTacToe
         //public Button a2 { get; set; }
         //public Button a3 { get; set; }
         public Grid LayoutRoot { get; set; }
-        private Button fieldToSet;
 
         public int isMyTurn;
         public char myTurn { get; set; }
@@ -31,6 +30,7 @@ namespace TicTacToe
 
         public void Join(string login)
         {
+            
             //Console.WriteLine(login);
             cHandler.SendData("1 " + login);
             //int status = Int32.Parse(cHandler.Receive());
@@ -56,13 +56,28 @@ namespace TicTacToe
                     {
                         Application.Current.Dispatcher.Invoke(() =>
                         {
+                            foreach (Button b in LayoutRoot.Children)
+                            {
+                                if (b.Content == "")
+                                {
+                                    b.IsEnabled = true;
+                                }
+                            }
                             Button opponnentsTurnButton = (Button)LayoutRoot.FindName(res.Substring(0, 2));
                             opponnentsTurnButton.Content = opponnentsTurn;
+                            opponnentsTurnButton.IsEnabled = false;
                             isMyTurn = 1;
                         });
                     });
                 } else
                 {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        foreach (Button b in LayoutRoot.Children)
+                        {
+                            b.IsEnabled = true;
+                        }
+                    });
                     myTurn = 'O';
                     opponnentsTurn = 'X';
                 }
@@ -110,6 +125,11 @@ namespace TicTacToe
         {
             if (isMyTurn == 1)
             {
+                foreach (Button b in LayoutRoot.Children)
+                {
+                    b.IsEnabled = false;
+                }
+
                 cHandler.SendData("2 " + field + " " + opponnentDescriptor);
                 isMyTurn = 0;
                 
@@ -117,8 +137,16 @@ namespace TicTacToe
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
+                        foreach (Button b in LayoutRoot.Children)
+                        {
+                            if(b.Content == "")
+                            {
+                                b.IsEnabled = true;
+                            }
+                        }
                         Button opponnentsTurnButton = (Button)LayoutRoot.FindName(res.Substring(0, 2));
                         opponnentsTurnButton.Content = opponnentsTurn;
+                        opponnentsTurnButton.IsEnabled = false;
                         isMyTurn = 1;
                     });
                 });
