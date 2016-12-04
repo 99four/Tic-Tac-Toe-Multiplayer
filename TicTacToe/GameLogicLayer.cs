@@ -143,7 +143,6 @@ namespace TicTacToe
                 cHandler.Receive((res) =>
                 {
                     myTimer.Start();
-                    //na odwrot!
                     timer.Close();
                     Application.Current.Dispatcher.Invoke(() =>
                     {
