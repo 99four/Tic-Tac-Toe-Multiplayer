@@ -22,10 +22,15 @@ namespace TicTacToe
         public int isMyTurn;
         public char myTurn { get; set; }
         public char opponnentsTurn { get; set; }
+        System.Timers.Timer timer = new System.Timers.Timer(10000);
+        System.Timers.Timer myTimer = new System.Timers.Timer(10000);
 
         public GameLogicLayer()
         {
             cHandler = new ConnectionHandler();
+            timer.Enabled = true;
+            timer.AutoReset = false;
+            
         }
 
         public void Join(string login)
@@ -125,6 +130,7 @@ namespace TicTacToe
 
         public void sendClickedField(string field)
         {
+            
             if (isMyTurn == 1)
             {
                 foreach (Control c in LayoutRoot.Children)
@@ -136,10 +142,24 @@ namespace TicTacToe
                 }
 
                 cHandler.SendData("2 " + field + " " + opponnentDescriptor);
+                myTimer.Stop();
+                timer.Elapsed += (source, e) => {
+                    MessageBox.Show("Nie dostalem odpowiedzi od 10 sekund :(");
+                    Environment.Exit(0);
+                };
+                myTimer.Elapsed += (source, e) => {
+                    MessageBox.Show("Jestem zbyt dlugo nieaktywny");
+                    Environment.Exit(0);
+                };
+                timer.Start();
+                
                 isMyTurn = 0;
                 
                 cHandler.Receive((res) =>
                 {
+                    myTimer.Start();
+                    
+                    timer.Close();
                     Application.Current.Dispatcher.Invoke(() =>
                     {
                         foreach (Control c in LayoutRoot.Children)
