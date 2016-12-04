@@ -14,14 +14,10 @@ namespace TicTacToe
         public ConnectionHandler cHandler;
         public string opponnentNickname { get; set; }
         private int opponnentDescriptor;
-        //public Button a1 { get; set; }
-        //public Button a2 { get; set; }
-        //public Button a3 { get; set; }
-        public Grid LayoutRoot { get; set; }
-
         public int isMyTurn;
         public char myTurn { get; set; }
         public char opponnentsTurn { get; set; }
+        public Grid LayoutRoot { get; set; }
         System.Timers.Timer timer = new System.Timers.Timer(10000);
         System.Timers.Timer myTimer = new System.Timers.Timer(10000);
 
@@ -35,10 +31,7 @@ namespace TicTacToe
 
         public void Join(string login)
         {
-            
-            //Console.WriteLine(login);
             cHandler.SendData("1 " + login);
-            //int status = Int32.Parse(cHandler.Receive());
             cHandler.Receive((response) => {
                 string[] splittedResponse = response.Split(null);
                 Console.WriteLine("response to: " + response);
@@ -51,7 +44,6 @@ namespace TicTacToe
                 opponnentNickname = splittedResponse[0];
                 opponnentDescriptor = Int32.Parse(splittedResponse[1]);
                 isMyTurn = Int32.Parse(splittedResponse[2]);
-                 // jezeli nie moja tura to nasluchuje na odpowiedz , jezeli dostane wiadomosc to uaktualniam plansze i isMyturn=1
 
                 if (isMyTurn == 0)
                 {
@@ -130,7 +122,6 @@ namespace TicTacToe
 
         public void sendClickedField(string field)
         {
-            
             if (isMyTurn == 1)
             {
                 foreach (Control c in LayoutRoot.Children)
@@ -181,7 +172,6 @@ namespace TicTacToe
                         } else
                         {
                             string[] splittedResponse = res.Split(null);
-                            //MessageBox.Show(splittedResponse[3]);
                             if (splittedResponse.Length > 3)
                             {
                                 Button opponnentsTurnButton = (Button)LayoutRoot.FindName(splittedResponse[3].Substring(0, 2));
@@ -204,7 +194,6 @@ namespace TicTacToe
                     });
                 });
             }
-        
         }
 
         public void Connect(string ip)
