@@ -196,11 +196,23 @@ namespace TicTacToe
                             opponnentsTurnButton.IsEnabled = false;
                         } else
                         {
+                            string[] splittedResponse = res.Split(null);
+                            //MessageBox.Show(splittedResponse[3]);
+                            if (splittedResponse.Length > 3)
+                            {
+                                Button opponnentsTurnButton = (Button)LayoutRoot.FindName(splittedResponse[3].Substring(0, 2));
+                                opponnentsTurnButton.Content = opponnentsTurn;
+                                opponnentsTurnButton.IsEnabled = false;
+                            }
                             MessageBox.Show("Mamy zwycięzcę! Wygrywa " + opponnentNickname);
 
-                            foreach (Button b in LayoutRoot.Children)
+                            foreach (Control c in LayoutRoot.Children)
                             {
-                                b.IsEnabled = false;
+                                if (c is Button)
+                                {
+                                    Button bbb = (Button)c;
+                                    bbb.IsEnabled = false;
+                                }
                             }
                         }
                         
