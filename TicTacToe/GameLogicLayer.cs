@@ -123,42 +123,6 @@ namespace TicTacToe
             
         }
 
-        private void ReceiveCallback(IAsyncResult ar)
-        {
-            try
-            {
-                /* retrieve the SocketStateObject */
-                SocketStateObject state = (SocketStateObject)ar.AsyncState;
-                Socket socketFd = state.m_SocketFd;
-
-                /* read data */
-                int size = socketFd.EndReceive(ar);
-
-                if (size > 0)
-                {
-                    state.m_StringBuilder.Append(Encoding.ASCII.GetString(state.m_DataBuf, 0, size));
-
-                    /* get the rest of the data */
-                    socketFd.BeginReceive(state.m_DataBuf, 0, SocketStateObject.BUF_SIZE, 0,
-                                          new AsyncCallback(ReceiveCallback), state);
-                }
-                else
-                {
-                    /* all the data has arrived */
-                    if (state.m_StringBuilder.Length > 1)
-                    {
-                        /* shutdown and close socket */
-                        socketFd.Shutdown(SocketShutdown.Both);
-                        socketFd.Close();
-                    }
-                }
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show("Exception:\t\n" + exc.Message.ToString());
-            }
-        }
-
         public void sendClickedField(string field)
         {
             if (isMyTurn == 1)
