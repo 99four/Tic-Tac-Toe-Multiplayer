@@ -41,11 +41,11 @@ namespace TicTacToe
 
             if (login.Length == 0)
             {
-                alertLabel.Content = "Wpisz jakiś login";
+                alertLabel.Content = "Wpisz jakiś nick!";
             }
             else if (login.Any(x => Char.IsWhiteSpace(x)))
             {
-                alertLabel.Content = "Login zawiera białe znaki.";
+                alertLabel.Content = "Nick ma białe znaki!";
             }
             else
             {

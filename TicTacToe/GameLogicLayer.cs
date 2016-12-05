@@ -85,7 +85,8 @@ namespace TicTacToe
                                     }
                                 }
                             }
-                            Button opponnentsTurnButton = (Button)LayoutRoot.FindName(res.Substring(0, 2));
+                            Button opponnentsTurnButton = (Button)LayoutRoot.FindName(res.Substring(2, 2));
+                            var test = res.Substring(2, 2);
                             opponnentsTurnButton.Content = opponnentsTurn;
                             opponnentsTurnButton.IsEnabled = false;
                             isMyTurn = 1;
@@ -159,12 +160,13 @@ namespace TicTacToe
                                 }
                             }
                         }
-                        if (res.Substring(0, 1) != 4.ToString())
+                        if (res.Substring(0, 1) == 2.ToString())
                         {
-                            Button opponnentsTurnButton = (Button)LayoutRoot.FindName(res.Substring(0, 2));
+                            string[] splittedResponse = res.Split(null);
+                            Button opponnentsTurnButton = (Button)LayoutRoot.FindName(res.Substring(2, 2));
                             opponnentsTurnButton.Content = opponnentsTurn;
                             opponnentsTurnButton.IsEnabled = false;
-                        } else
+                        } else if (res.Substring(0, 1) == 4.ToString())
                         {
                             string[] splittedResponse = res.Split(null);
                             if (splittedResponse.Length > 3)
@@ -173,7 +175,7 @@ namespace TicTacToe
                                 opponnentsTurnButton.Content = opponnentsTurn;
                                 opponnentsTurnButton.IsEnabled = false;
                             }
-                            MessageBox.Show("Mamy zwycięzcę! Wygrywa " + opponnentNickname);
+                            MessageBox.Show("Mamy zwycięzcę! Wygrywa " + splittedResponse[2]);
 
                             foreach (Control c in LayoutRoot.Children)
                             {
