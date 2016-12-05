@@ -34,6 +34,13 @@ namespace TicTacToe
             Button clickedButton = (Button)sender;
             clickedButton.Content = gameLogicLayer.myTurn;
             gameLogicLayer.sendClickedField(clickedButton.Name);
+            gameLogicLayer.turnCounter++;
+            if (gameLogicLayer.turnCounter == 9)
+            {
+                gameLogicLayer.timer.Close();
+                gameLogicLayer.myTimer.Close();
+                MessageBox.Show("Mamy remis!");
+            }
             clickedButton.IsEnabled = false;
         }
 

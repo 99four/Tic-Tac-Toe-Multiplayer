@@ -15,11 +15,12 @@ namespace TicTacToe
         public string opponnentNickname { get; set; }
         private int opponnentDescriptor;
         public int isMyTurn;
+        public int turnCounter { get; set; }
         public char myTurn { get; set; }
         public char opponnentsTurn { get; set; }
         public Grid LayoutRoot { get; set; }
-        System.Timers.Timer timer = new System.Timers.Timer(10000);
-        System.Timers.Timer myTimer = new System.Timers.Timer(10000);
+        public System.Timers.Timer timer = new System.Timers.Timer(10000);
+        public System.Timers.Timer myTimer = new System.Timers.Timer(10000);
 
         public GameLogicLayer()
         {
@@ -88,6 +89,7 @@ namespace TicTacToe
                             Button opponnentsTurnButton = (Button)LayoutRoot.FindName(res.Substring(2, 2));
                             var test = res.Substring(2, 2);
                             opponnentsTurnButton.Content = opponnentsTurn;
+                            turnCounter++;
                             opponnentsTurnButton.IsEnabled = false;
                             isMyTurn = 1;
                         });
@@ -160,12 +162,19 @@ namespace TicTacToe
                                 }
                             }
                         }
-                        if (res.Substring(0, 1) == 2.ToString())
+                        if (res.Substring(0, 1) != 4.ToString())
                         {
                             string[] splittedResponse = res.Split(null);
                             Button opponnentsTurnButton = (Button)LayoutRoot.FindName(res.Substring(2, 2));
                             opponnentsTurnButton.Content = opponnentsTurn;
+                            turnCounter++;
                             opponnentsTurnButton.IsEnabled = false;
+                            if (turnCounter == 9)
+                            {
+                                timer.Close();
+                                myTimer.Close();
+                                MessageBox.Show("Mamy remis!");
+                            }
                         } else if (res.Substring(0, 1) == 4.ToString())
                         {
                             string[] splittedResponse = res.Split(null);
@@ -173,10 +182,12 @@ namespace TicTacToe
                             {
                                 Button opponnentsTurnButton = (Button)LayoutRoot.FindName(splittedResponse[3].Substring(0, 2));
                                 opponnentsTurnButton.Content = opponnentsTurn;
+                                turnCounter++;
                                 opponnentsTurnButton.IsEnabled = false;
                             }
+                            timer.Close();
+                            myTimer.Close();
                             MessageBox.Show("Mamy zwycięzcę! Wygrywa " + splittedResponse[2]);
-
                             foreach (Control c in LayoutRoot.Children)
                             {
                                 if (c is Button)
@@ -186,7 +197,6 @@ namespace TicTacToe
                                 }
                             }
                         }
-                        
                         isMyTurn = 1;
                     });
                 });
