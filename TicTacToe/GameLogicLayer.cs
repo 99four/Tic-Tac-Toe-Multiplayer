@@ -71,6 +71,7 @@ namespace TicTacToe
                     cHandler.Receive((res) =>
                     {
                         timer.Close();
+                        myTimer.Start();
                         Application.Current.Dispatcher.Invoke(() =>
                         {
                             foreach (Control c in LayoutRoot.Children)
@@ -94,7 +95,7 @@ namespace TicTacToe
                 {
                     myTurn = 'O';
                     opponnentsTurn = 'X';
-                    myTimer.Start();
+                    
                     Application.Current.Dispatcher.Invoke(() =>
                     {
                         foreach (Control c in LayoutRoot.Children)
@@ -116,6 +117,7 @@ namespace TicTacToe
                             }
                         }
                     });
+                    myTimer.Start();
                 }
             });
             
