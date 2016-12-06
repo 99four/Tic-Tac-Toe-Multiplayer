@@ -280,3 +280,6 @@ __pycache__/
 
 ### VisualStudio Patch ###
 build/
+
+# server executable
+server/server
