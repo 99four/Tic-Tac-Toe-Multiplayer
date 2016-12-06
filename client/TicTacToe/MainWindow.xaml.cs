@@ -34,8 +34,7 @@ namespace TicTacToe
         private void button_Click(object sender, RoutedEventArgs e)
         {
             string login = nickNameTextBox.Text;
-            //string ip = ipTextBox.Text;
-            string ip = "192.168.0.102";
+            string ip = ipTextBox.Text;
 
             if (login.Length == 0)
             {
