@@ -37,8 +37,6 @@ namespace TicTacToe
             //string ip = ipTextBox.Text;
             string ip = "192.168.0.102";
 
-            gameLogicLayer.Connect(ip);
-
             if (login.Length == 0)
             {
                 alertLabel.Content = "Wpisz jakiś nick!";
@@ -49,16 +47,12 @@ namespace TicTacToe
             }
             else
             {
+                gameLogicLayer.Connect(ip);
                 gameBoard = new GameBoard(gameLogicLayer, login);
                 gameBoard.Show();
                 gameLogicLayer.Join(login);
                 this.Close();
             }
-        }
-
-        private void textBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }

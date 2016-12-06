@@ -29,15 +29,10 @@ namespace TicTacToe
 
                 /* read data */
                 int size = socketFd.EndReceive(ar);
-                //Console.WriteLine(size);
 
                 if (size > 0)
                 {
                     parameters.state.m_StringBuilder.Append(Encoding.ASCII.GetString(parameters.state.m_DataBuf, 0, size));
-               //     Console.WriteLine(parameters.state.m_StringBuilder.ToString());
-
-               
-
                     /* all the data has arrived */
                     if (parameters.state.m_StringBuilder.Length > 1)
                     {
